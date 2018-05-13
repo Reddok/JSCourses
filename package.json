@@ -1,0 +1,29 @@
+{
+  "name": "jscourses",
+  "version": "1.0.0",
+  "description": "JS Courses",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reddok/JSCourses.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Reddok/JSCourses/issues"
+  },
+  "homepage": "https://github.com/Reddok/JSCourses#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "connect-mongo": "^2.0.1",
+    "ejs": "^2.5.9",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "lodash": "^4.17.5",
+    "mongoose": "^5.0.16"
+  }
+}
