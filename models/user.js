@@ -1,12 +1,13 @@
 let mongoose = require('mongoose'),
+    sha256 = require('crypto-js/sha256'),
     userSchema = new mongoose.Schema({
-        name: String,
+        name: {type: String, required: true},
         email: {type: String, required: true, unique: true},
         password: {type: String, required: true},
         createdAt: {type: String, default: Date.now},
         avatar: String
     }, {collection: 'users'}),
-    User = mongoose.model('User', userSchema);
+    User;
 
 userSchema.pre('save', function(next) {
 
@@ -18,8 +19,11 @@ userSchema.pre('save', function(next) {
 
 });
 
-userSchema.methods.checkPassword = function(pass) {
-    return pass && sha256(pass) === this.password;
+userSchema.methods.checkPassword = function checkPassword (pass) {
+    console.log(pass, this.password, sha256(pass).toString(), this.password);
+    return pass && sha256(pass).toString() === this.password;
 };
+
+User = mongoose.model('User', userSchema);
 
 module.exports = User;

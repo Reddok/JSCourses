@@ -11,9 +11,9 @@ module.exports = function (app) {
         res.status(200).send('Index');
     });
 
-    app.use((error, req, res, next) => {
-        let status = error.status || 500;
-
-        res.status(status).send(error);
+    app.use((error, req, res) => {
+        let status = error.status || 500,
+            message = error.message;
+        res.status(status).send({status, message});
     });
 };

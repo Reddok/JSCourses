@@ -29,6 +29,8 @@ class PostsHandler {
             filter.$lte = {createdAt: req.query.to};
         }
 
+        console.log(filter);
+
         Post.aggregate([
             {
                 $match: filter
@@ -86,7 +88,7 @@ class PostsHandler {
                     return next(err);
                 }
 
-                res.status(201).send(updated);
+                res.status(200).send(updated);
             });
 
         });
@@ -116,7 +118,7 @@ class PostsHandler {
                     return next(err);
                 }
 
-                res.status(201).send(removed);
+                res.status(200).send(removed);
             });
 
         });

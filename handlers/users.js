@@ -63,7 +63,9 @@ class UsersHandler {
     signUp(req, res, next) {
 
         let email = req.body.email,
-            password = req.body.password;
+            password = req.body.password,
+            name = req.body.name,
+            avatar = req.body.avatar || null;
 
         User.find({email}).count((err, count) => {
 
@@ -77,7 +79,7 @@ class UsersHandler {
                 return next(new Error({message: 'Email already taken'}));
             }
 
-            newUser = new User({email, password});
+            newUser = new User({email, password, name, avatar});
 
             newUser.save((err, result) => {
 
@@ -94,9 +96,8 @@ class UsersHandler {
     }
 
     signIn(req, res, next) {
-        let body = req.body,
-            email = body.email,
-            pass = body.pass;
+        let email = req.body.email,
+            pass = req.body.password;
 
         User.findOne({email}, (err, user) => {
 
@@ -115,7 +116,7 @@ class UsersHandler {
             req.session.userId = user._id;
             req.session.loggedIn = true;
 
-            res.status(201).send(user);
+            res.status(200).send(user);
         });
     }
 
