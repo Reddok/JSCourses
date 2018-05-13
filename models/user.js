@@ -20,7 +20,6 @@ userSchema.pre('save', function(next) {
 });
 
 userSchema.methods.checkPassword = function checkPassword (pass) {
-    console.log(pass, this.password, sha256(pass).toString(), this.password);
     return pass && sha256(pass).toString() === this.password;
 };
 

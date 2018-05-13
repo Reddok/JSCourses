@@ -29,7 +29,6 @@ class PostsHandler {
             filter.$lte = {createdAt: req.query.to};
         }
 
-        console.log(filter);
 
         Post.aggregate([
             {
