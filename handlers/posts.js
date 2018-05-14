@@ -1,4 +1,6 @@
-let Post = require('../models/post');
+let Post = require('../models/post'),
+    mongoose = require('mongoose'),
+    ObjectId = mongoose.Types.ObjectId;
 
 class PostsHandler {
 
@@ -13,23 +15,28 @@ class PostsHandler {
     }
 
     search(req ,res, next) {
-        let filter = {
-
-        };
+        let filter = {};
 
         if (req.query.author) {
-            filter.userId = req.query.author;
+            filter.userId = new ObjectId(req.query.author);
         }
 
-        if (req.query.from) {
-            filter.$gte = {createdAt: req.query.from};
+        if (req.query.from || req.query.to) {
+
+            filter.createdAt = {};
+
+            if (req.query.from) {
+                filter.createdAt.$gte = req.query.from;
+            }
+
+            if (req.query.to) {
+                filter.createdAt.$lte = req.query.to;
+            }
+
         }
 
-        if (req.query.to) {
-            filter.$lte = {createdAt: req.query.to};
-        }
-
-
+        console.log(filter);
+        
         Post.aggregate([
             {
                 $match: filter
