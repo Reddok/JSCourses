@@ -121,9 +121,8 @@ class UsersHandler {
     }
 
     signOut(req, res, next) {
-        delete(req.session.userId);
-        delete(req.session.loggedIn);
-
+        console.log('die', req.session.userId);
+        req.session.destroy(req.session.userId);
         res.redirect('/');
     }
 

@@ -36,7 +36,7 @@ class PostsHandler {
         }
 
         console.log(filter);
-        
+
         Post.aggregate([
             {
                 $match: filter

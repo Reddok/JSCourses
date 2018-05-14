@@ -6,10 +6,13 @@ let express = require('express'),
 
 router.post('/signIn', userHandler.signIn);
 router.post('/signUp', userHandler.signUp);
+router.get('/signOut', session.checkAuthentication, userHandler.signOut);
 
 router.get('/', session.checkAuthentication, userHandler.getAllUsers);
+
+
 router.get('/:id', session.checkAuthentication, userHandler.getUser);
-router.get('/signOut', session.checkAuthentication, userHandler.signOut);
+
 
 router.patch('/:id', session.checkAuthentication, userHandler.updateUser);
 router.delete('/:id', session.checkAuthentication, userHandler.deleteUser);
